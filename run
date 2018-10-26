@@ -1,0 +1,16 @@
+#!/bin/sh
+
+rm *.o
+rm *.mod
+
+gfortran -fdefault-real-8 -c SRC/definition.f95 
+gfortran -fdefault-real-8 -c SRC/lecture.f95 
+gfortran -fdefault-real-8 -c SRC/initial.f95 
+gfortran -fdefault-real-8 -c SRC/operation.f95 
+gfortran -fdefault-real-8 -c SRC/out.f95 
+mv *.o obj/.
+
+gfortran obj/definition.o obj/lecture.o obj/initial.o obj/operation.o obj/out.o SRC/LBM.f95
+mv *.mod mod/.
+
+./a.out
