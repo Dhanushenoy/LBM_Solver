@@ -14,7 +14,14 @@ module definition
   real::dx,dy,dt
   real::u0
   real::s1,s2
-
+  
+!MRT Schemes
+  integer::l
+  real::a1,sumcc,tau
+  real::suma,sumb
+  real,dimension(0:8,0:8)::ev,tm,tminv,stmiv
+  real,dimension(0:8)::sm
+  real,allocatable::fmom(:,:,:)
 
 
 end module definition

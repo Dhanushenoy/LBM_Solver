@@ -1,5 +1,10 @@
 program LBM
 
+
+
+
+
+
 use definition
 use lecture
 use initial
@@ -8,15 +13,34 @@ use out
 
 implicit none
 
-call lect(1)
-call D2Q9
-!call VTKout(3)
+!******For cpu time*********!
+real::start,finish          !
+call cpu_time(start)        !
+!***************************!
 
+call lect(1)
+
+!**********************************|
+! D2Q9 is used for 2d flows        |
+! 3D schemes will be used later    |
+!**********************************|
+call D2Q9
+
+!Calculation loop ---------------
 do while(time<=mstep)
 
+!***********************************|
+! The collision step contains       |
+! both MRT not sigle relaxation     |
+! Just use collsion or collisionMRT |
+!***********************************|
 call collision
+
 call streaming
+!Boundary conditions----------------
 call boundary
+
+!Collecting all the terms-----------
 call Rhouv
 
 
@@ -27,5 +51,10 @@ end if
 end do
 
 call VTKout(100)
-!call output(10)
+call output(10)
+
+!***********CPU time ****************************!
+call cpu_time(finish)                            !
+print '("time=",f16.10," seconds")',finish-start !
+!************************************************!
 end program LBM

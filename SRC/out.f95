@@ -94,7 +94,28 @@ end do
 write(10,*)
 end do
 
+open(unit=15,file='plot25')
+open(unit=16,file='plot100')
+open(unit=17,file='plot250')
 
+do i=0,n
+  if (i==25) then
+    do j=0,m
+    write(15,*)j,u(i,j)/u0
+    end do
+
+  elseif (i==100) then
+      do j=0,m
+      write(16,*)j,u(i,j)/u0
+      end do
+
+    elseif (i==250) then
+        do j=0,m
+        write(17,*)j,u(i,j)/u0
+        end do
+  end if
+
+end do
 end subroutine output
 
 
@@ -111,8 +132,6 @@ subroutine VTKout(vtk)
   real::magV
 
 open(unit=vtk,file='out.vtk')!,form='formatted',access='stream',status='replace')
-String1 = "(A24)"
-
 
 write(vtk,'(A)')'# vtk DataFile Version 3.0'
 write(vtk,'(A)')'output.vtk'
@@ -132,7 +151,7 @@ write(vtk,'(A)')'LOOKUP_TABLE table_u'
 do i=0,n
   do j=0,m
     magV=(u(i,j)*u(i,j)+v(i,j)*v(i,j))**0.5
-write(vtk,'(F16.10)')magV
+write(vtk,'(F16.10)')u(i,j)
   end do
 end do
 
