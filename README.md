@@ -6,6 +6,10 @@ Lattice Boltzmann method based solver for incompressible Navier-Stokes equation
 *currently solving just the velocity field
 *Current boundary conditions are set to Lid-driven cavity
 
+What's new:
+
+29/Oct/2018
+1.Added multiRelaxation Scheme
 
 In linux, just execute the "run" file. 
 The boundary conditions, collision step, stream step etc are in the folder SRC
